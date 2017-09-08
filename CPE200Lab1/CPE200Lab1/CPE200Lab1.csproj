@@ -52,7 +52,6 @@
     <Compile Include="ExtendForm.Designer.cs">
       <DependentUpon>ExtendForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="RPNForm.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
