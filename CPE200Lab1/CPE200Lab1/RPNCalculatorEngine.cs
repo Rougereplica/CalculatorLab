@@ -24,14 +24,22 @@ namespace CPE200Lab1
                 else if (isOperator(token))
                 {
                     //FIXME, what if there is only one left in stack?
-                    secondOperand = rpnStack.Pop();
-                    firstOperand = rpnStack.Pop();
-                    result = calculate(token, firstOperand, secondOperand, 4);
-                    if (result is "E")
+                    if (rpnStack.Count == 1)
                     {
-                        return result;
+                        result = "0";
+                        rpnStack.Push(result);
+
                     }
-                    rpnStack.Push(result);
+                    
+                        secondOperand = rpnStack.Pop();
+                        firstOperand = rpnStack.Pop();
+                        result = calculate(token, firstOperand, secondOperand, 4);
+                        if (result is "E")
+                        {
+                            return result;
+                        }
+                        rpnStack.Push(result);
+                    
                 }
             }
             //FIXME, what if there is more than one, or zero, items in the stack?
