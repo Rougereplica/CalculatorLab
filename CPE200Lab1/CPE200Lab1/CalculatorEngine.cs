@@ -32,12 +32,18 @@ namespace CPE200Lab1
             List<string> parts = str.Split(' ').ToList<string>();
             string result;
             //As long as we have more than one part
-            while(parts.Count > 1)
-            {
+
+
+
+            while (parts.Count > 1)
+            {       
+                
                 //Check if the first three is ready for calcuation
-                if(!(isNumber(parts[0]) && isOperator(parts[1]) && isNumber(parts[2])))
+                if (!(isNumber(parts[0]) && isOperator(parts[1]) && isNumber(parts[2])))
                 {
                     return "E";
+
+
                 } else
                 {
                     //Calculate the first three
@@ -49,6 +55,7 @@ namespace CPE200Lab1
                 }
             }
             return parts[0];
+        
         }
         public string unaryCalculate(string operate, string operand, int maxOutputSize = 8)
         {
