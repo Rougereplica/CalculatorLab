@@ -122,9 +122,18 @@ namespace CPE200Lab1
                         double result;
                         string[] parts;
                         int remainLength;
-
+                     
                         result = (Convert.ToDouble(firstOperand) / Convert.ToDouble(secondOperand));
                         // split between integer part and fractional part
+                        if (Convert.ToDouble(firstOperand) % Convert.ToDouble(secondOperand) == 0)
+                        {
+                            //    Convert.ToInt32(result);
+                            return result.ToString(); //Convert.ToString(result);
+
+                        }
+
+                  //      Math.Round(result, );
+
                         parts = result.ToString().Split('.');
                         // if integer part length is already break max output, return error
                         if (parts[0].Length > maxOutputSize)
