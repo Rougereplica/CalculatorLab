@@ -52,24 +52,25 @@ namespace CPE200Lab1
                                            
                     }
 
-                    else { 
+                    else {
 
-                    secondOperand = rpnStack.Pop();
+                        if (rpnStack.Count == 0 || rpnStack.Count == 1)
+                        {
+                            return "E";
+
+                        }
+
+                        secondOperand = rpnStack.Pop();
                    
 
-                    firstOperand = rpnStack.Pop();
+                        firstOperand = rpnStack.Pop();
 
-                     /*   if (rpnStack.Count != 0 && )
-                        {
-                            result = "E";
+                                          
+                        
 
-                        }
-                        else*/
-                        {
+                        result = calculate(token, firstOperand, secondOperand, 4);
 
-                            result = calculate(token, firstOperand, secondOperand, 4);
-
-                        }
+                        
                                             
 
                     if (result is "E")
@@ -87,7 +88,10 @@ namespace CPE200Lab1
 
                 }
             }
-            
+            if (rpnStack.Count != 1)
+            {
+                return "E";
+            }
             result = rpnStack.Pop();
             return result;
         }
