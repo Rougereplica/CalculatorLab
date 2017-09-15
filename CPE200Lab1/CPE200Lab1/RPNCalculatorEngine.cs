@@ -10,71 +10,73 @@ namespace CPE200Lab1
     {
         public new string Process(string str)
         {
+            if (str == null || str == "")
+            return "E";
+            
+
             Stack<string> rpnStack = new Stack<string>();
             List<string> parts = str.Split(' ').ToList<string>();
-           //List<string> parts = new List<string>();
-           
             string result;
             string firstOperand, secondOperand;
             bool afterOp = false;
             int opCount = 0;
             int numCount = 0;
 
-            if (str == "" || str == null)
+            for (int count = 0; count < parts.Count; count++)
             {
-                return "E";
+                string token = parts[count];
 
-            }
-            else
-            { 
-                for (int count = 0; count < parts.Count; count++)
+                if (parts.Count == 1 && Convert.ToDouble(token)!=0)
                 {
-                    string token = parts[count];
 
+                    return "E";
 
-                    if (parts.Count == 1 && Convert.ToInt32(token) != 0)
+                }
+
+                else if (isNumber(token))
+                {
+                    if (afterOp == true)
                     {
-
                         return "E";
+                    }
+                    else
+                    {
+
+                        rpnStack.Push(token);
+                        numCount++;
+
+                    }
+                }
+                else if (isOperator(token))
+                {
+
+                    if (rpnStack.Count == 1)
+                    {
+                        result = "E";
+                        rpnStack.Push(result);
 
                     }
 
-                    else if (isNumber(token))
+                    else
                     {
-                        if (afterOp == true)
-                        {
-                            return "E";
-                        }
-                        else
-                        {
-
-                            rpnStack.Push(token);
-                            numCount++;
-
-                        }
-                    }
-                    else if (isOperator(token))
-                    {
-                        opCount++;
-
-                        if (rpnStack.Count == 0 || rpnStack.Count == 1)
-                        {
-
-                            return "E";
-
-                        }
 
                         secondOperand = rpnStack.Pop();
 
 
                         firstOperand = rpnStack.Pop();
 
-                        if (firstOperand == null)
+                        /*   if (rpnStack.Count != 0 && )
+                           {
+                               result = "E";
+
+                           }
+                           else*/
                         {
-                            return "E";
+
+                            result = calculate(token, firstOperand, secondOperand, 4);
+
                         }
 
-                        result = calculate(token, firstOperand, secondOperand, 4);
 
                         if (result is "E")
                         {
@@ -85,22 +87,18 @@ namespace CPE200Lab1
 
 
                         afterOp = true;
-
-
-                        // if (rpnStack.Count )
-
+                        opCount++;
 
                     }
 
-
                 }
-
             }
 
-            if (rpnStack.Count != 1 )
+            if(rpnStack.Count != 1)
             {
                 return "E";
             }
+
             result = rpnStack.Pop();
             return result;
         }
