@@ -19,7 +19,8 @@ namespace CPE200Lab1
         private string firstOperand;
         private string operate;
         private double memory;
-        private CalculatorEngine engine;
+        private SimpleCalculatorEngine engine;
+
 
         private void resetAll()
         {
@@ -29,6 +30,7 @@ namespace CPE200Lab1
             isAfterOperater = false;
             isAfterEqual = false;
             firstOperand = null;
+
         }
 
       
@@ -37,7 +39,7 @@ namespace CPE200Lab1
         {
             InitializeComponent();
             memory = 0;
-            engine = new CalculatorEngine();
+            engine = new SimpleCalculatorEngine();
             resetAll();
         }
 
@@ -69,7 +71,7 @@ namespace CPE200Lab1
             isAfterOperater = false;
         }
 
-        private void btnUnaryOperator_Click(object sender, EventArgs e)
+      private void btnUnaryOperator_Click(object sender, EventArgs e)
         {
             if (lblDisplay.Text is "Error")
             {
@@ -95,6 +97,7 @@ namespace CPE200Lab1
 
         private void btnOperator_Click(object sender, EventArgs e)
         {
+            
             if (lblDisplay.Text is "Error")
             {
                 return;
@@ -106,7 +109,8 @@ namespace CPE200Lab1
             if(firstOperand != null)
             {
                 string secondOperand = lblDisplay.Text;
-                string result = engine.calculate(operate, firstOperand, secondOperand);
+                engine.setSecondOperand(lblDisplay.Text);
+                string result = engine.calculate(operate);
                 if (result is "E" || result.Length > 8)
                 {
                     lblDisplay.Text = "Error";
@@ -124,6 +128,7 @@ namespace CPE200Lab1
                 case "X":
                 case "÷":
                     firstOperand = lblDisplay.Text;
+                    engine.setFirstOperand(lblDisplay.Text);
                     isAfterOperater = true;
                     break;
                 case "%":
@@ -135,12 +140,17 @@ namespace CPE200Lab1
 
         private void btnEqual_Click(object sender, EventArgs e)
         {
+            if(isAfterEqual == true && isAfterOperater == false)
+            {
+                return;
+            }
             if (lblDisplay.Text is "Error")
             {
                 return;
             }
             string secondOperand = lblDisplay.Text;
-            string result = engine.calculate(operate, firstOperand, secondOperand);
+            engine.setSecondOperand(lblDisplay.Text);
+            string result = engine.calculate(operate);
             if (result is "E" || result.Length > 8)
             {
                 lblDisplay.Text = "Error";
